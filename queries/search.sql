@@ -1,13 +1,13 @@
 -- name: RankedSearch :many
-SELECT *,
-       ts_rank(search, websearch_to_tsquery('simple', ?)) rank
+SELECT uuid, display_name, country, locality, postal_code, street_address, region, external_id, active, created_at,
+       ts_rank(search, websearch_to_tsquery('simple', $1)) rank
 FROM account_groups
-WHERE search @@ websearch_to_tsquery('simple', ?)
+WHERE search @@ websearch_to_tsquery('simple', $1)
 ORDER BY rank DESC
     LIMIT 25;
 
 -- name: Search :many
-SELECT *
+SELECT uuid, display_name, country, locality, postal_code, street_address, region, external_id, active, created_at
 FROM account_groups
-WHERE search @@ websearch_to_tsquery('simple', ?)
-LIMIT 25;
+WHERE search @@ websearch_to_tsquery('simple', $1)
+    LIMIT 25;

@@ -9,6 +9,7 @@ CREATE TABLE "account_groups" (
     "external_id" character varying NOT NULL,
     "active" boolean NOT NULL,
     "created_at" timestamptz NOT NULL,
+    "updated_at" timestampz NOT NULL,
     PRIMARY KEY ("uuid"));
 
 CREATE UNIQUE INDEX "account_groups_external_id_key" ON "account_groups" ("external_id");
